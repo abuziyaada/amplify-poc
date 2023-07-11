@@ -12,9 +12,6 @@
       "AmplifyAppId": "d6gng8metgk2"
     },
     "categories": {
-      "api": {
-        "amplifypoc": {}
-      },
       "auth": {
         "amplifypoc4d276673": {}
       }
