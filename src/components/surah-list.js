@@ -7,6 +7,9 @@ import PauseIcon from "@mui/icons-material/Pause";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { updateSurah } from "../graphql/mutations";
 import ReactPlayer from "react-player";
+import AddSurah from "./add-surah";
+import AddIcon from "@mui/icons-material/Add";
+
 const SurahList = () => {
   const [surahs, setSurahs] = useState([]);
 
@@ -67,6 +70,8 @@ const SurahList = () => {
     }
   };
 
+  const [showAddSurah, setShowAddNewSurah] = useState(false);
+
   return (
     <div>
       <div className="surahList">
@@ -103,6 +108,19 @@ const SurahList = () => {
             </Paper>
           );
         })}
+        {showAddSurah ? (
+          <AddSurah
+            onUpload={() => {
+              setShowAddNewSurah(false);
+              fetchsurahs();
+            }}
+          />
+        ) : (
+          <IconButton onClick={() => setShowAddNewSurah(true)}>
+            {" "}
+            <AddIcon />{" "}
+          </IconButton>
+        )}
       </div>
     </div>
   );
