@@ -6,6 +6,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { updateSurah } from "../graphql/mutations";
+import ReactPlayer from "react-player";
 const SurahList = () => {
   const [surahs, setSurahs] = useState([]);
 
@@ -88,6 +89,17 @@ const SurahList = () => {
                 </div>
                 <div className="surahDescription">{surah.description}</div>
               </div>
+              {surahPlaying === idx ? (
+                <div className="ourAudioPlayer">
+                  <ReactPlayer
+                    url={audioURL}
+                    controls
+                    playing
+                    height="50px"
+                    onPause={() => toggleSurah(idx)}
+                  />
+                </div>
+              ) : null}
             </Paper>
           );
         })}
