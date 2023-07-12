@@ -1,0 +1,13 @@
+{
+  "resourceName": "surahs",
+  "policyUUID": "a9e63c7f",
+  "bucketName": "surahs-bucket",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

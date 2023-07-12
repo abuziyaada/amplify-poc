@@ -6,13 +6,15 @@ import { createBlog } from "./graphql/mutations";
 import { useEffect, useState } from "react";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import SurahList from "./components/surah-list";
 
 function App() {
   return (
     <Authenticator>
       {({ signOut, user }) => (
         <main>
-          <h1>Bismillah {user.username}</h1>
+          <h1>Bismillah</h1>
+          <SurahList />
           <button onClick={signOut}>Sign out</button>
         </main>
       )}
