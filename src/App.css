@@ -35,3 +35,9 @@
 .surahTitle {
   font-weight: bold;
 }
+
+.ourAudioPlayer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

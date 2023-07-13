@@ -14,10 +14,17 @@ const AddSurah = ({ onUpload }) => {
 
   const [mp3Data, setMp3Data] = useState();
 
+  const [isUploading, setIsUploading] = useState(false);
+
   const uploadSurah = async () => {
     //Upload the surah
     console.log("surahData", surahData);
     const { title, description, owner } = surahData;
+
+    if (!title || !description || !owner || !mp3Data)
+      return alert("Fill all fields");
+
+    setIsUploading(true);
 
     const { key } = await Storage.put(`${uuid()}.mp3`, mp3Data, {
       contentType: "audio/mp3",
@@ -34,6 +41,8 @@ const AddSurah = ({ onUpload }) => {
     await API.graphql(
       graphqlOperation(createSurah, { input: createSurahInput })
     );
+    setIsUploading(false);
+    alert("Surah Uploaded successfully");
     onUpload();
   };
 
@@ -43,11 +52,13 @@ const AddSurah = ({ onUpload }) => {
         label="Title"
         value={surahData.title}
         onChange={(e) => setSurahData({ ...surahData, title: e.target.value })}
+        disabled={isUploading}
       />
       <TextField
         label="Artist"
         value={surahData.owner}
         onChange={(e) => setSurahData({ ...surahData, owner: e.target.value })}
+        disabled={isUploading}
       />
       <TextField
         label="Description"
@@ -55,14 +66,16 @@ const AddSurah = ({ onUpload }) => {
         onChange={(e) =>
           setSurahData({ ...surahData, description: e.target.value })
         }
+        disabled={isUploading}
       />
       <input
         type="file"
+        disabled={isUploading}
         accept="audio/mp3"
         onChange={(e) => setMp3Data(e.target.files[0])}
       />
 
-      <IconButton onClick={uploadSurah}>
+      <IconButton disabled={isUploading} onClick={uploadSurah}>
         <PublishIcon />
       </IconButton>
     </div>

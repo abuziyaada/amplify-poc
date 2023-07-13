@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation, Storage } from "aws-amplify";
 import { listSurahs } from "../graphql/queries";
-import { Paper, IconButton } from "@mui/material";
+import { Paper, IconButton, Box, Typography } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -30,6 +30,7 @@ const SurahList = () => {
       surah.likes = surah.likes + 1;
       delete surah.createdAt;
       delete surah.updatedAt;
+      delete surah.__typename;
 
       console.log(surah);
       const surahData = await API.graphql(
@@ -116,10 +117,19 @@ const SurahList = () => {
             }}
           />
         ) : (
-          <IconButton onClick={() => setShowAddNewSurah(true)}>
-            {" "}
-            <AddIcon />{" "}
-          </IconButton>
+          <Box
+            sx={{
+              mt: "15px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography>Add Surah</Typography>
+            <IconButton onClick={() => setShowAddNewSurah(true)}>
+              <AddIcon />
+            </IconButton>
+          </Box>
         )}
       </div>
     </div>
